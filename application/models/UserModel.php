@@ -19,5 +19,14 @@ class UserModel  extends CI_Model
 			return FALSE;
 		}
 	}
+	function InsertProductDetails($data)
+	{
+		$this->db->insert('prod_details',$data);	
+	}
+	function getUsers()
+	{
+		$q = $this->db->query("Select * from ci_register")->result_array();
+		return $q;
+	}
 	
 }

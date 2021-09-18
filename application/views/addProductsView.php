@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/summernote/summernote-bs4.min.css">
+  <script src="https://cdn.ckeditor.com/4.16.2/basic/ckeditor.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -114,33 +115,67 @@
           </li>
       </ul>  
     </nav>
-      <!-- /.sidebar-menu -->
+
     </div>
-    <!-- /.sidebar -->
+
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
+
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0">Add Products</h1>
             <form action="logout" method="post">
-          </div><!-- /.col -->
+          </div>
           <button type="submit" name="logout" algin ='center' class="btn btn-secondary">Logout</button>
           </form>
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+        </div>
+      </div>
     </div>
-    <!-- /.content-header -->
+    <div class="conatiner">
+    <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">ADD PRODUCTS</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form method="post" enctype="multipart/form-data">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="pname">Product Name</label>
+                    <input type="text" class="form-control" id="pname" name="pname" placeholder="Product Name">
+                  </div>
+                  <div class="form-group">
+                    <label for="price">Product price</label>
+                    <input type="number" name="price" class="form-control" id="price" >
+                  </div>
+                  <div class="form-group">
+                    <label for="prod_desc">Product Description</label>
+                    <textarea type="text" name="prod_desc" class="form-control" id="prod_desc" id="" cols="30" rows="10"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="m_image">Main Image</label>
+                    <input type="file"  id="m_image"  name='m_img'>
 
-    <!-- Main content -->
-    
-    <!-- /.content -->
+                    <label for="multi_image">Add Multiple Image</label>
+                    <input type="file" multiple id="multi_image"  name='multi_image[]'>
+                  </div>
+
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </div>
+
+ 
   </div>
-  <!-- /.content-wrapper -->
+
   
 
   <!-- Control Sidebar -->
@@ -185,5 +220,9 @@
 <script src="<?php echo base_url(); ?>assets/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?php echo base_url(); ?>assets/dist/js/pages/dashboard.js"></script>
+<script>
+
+      CKEDITOR.replace('prod_desc');
+    </script>
 </body>
 </html>

@@ -24,6 +24,18 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets//dist/css/adminlte.min.css" />
 	</head>
 	<body class="hold-transition login-page">
+	<div>
+    <?php
+    if (!empty($this->session->flashdata('error'))) {
+      echo ("<div class='alert alert-danger'>" . $this->session->flashdata('error') . "</div>");
+    }
+    ?>
+    <?php
+    if (!empty($this->session->flashdata('success'))) {
+      echo ("<div class='alert alert-success'>" . $this->session->flashdata('success') . "</div>");
+    }
+    ?>
+  </div>
 		<div class="login-box">
 			<!-- /.login-logo -->
 			<div class="card card-outline card-primary">

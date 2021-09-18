@@ -75,7 +75,9 @@ class UserController extends CI_Controller {
 			redirect(base_url()."home_view");
 			// dd($q);
 		} else {
-			echo "Wrong Credentials";
+			$this->session->set_flashdata("error",'Wrong Credentials');
+			redirect(base_url()."login_view");
+			// echo "Wrong Credentials";
 		}
 
 	}
