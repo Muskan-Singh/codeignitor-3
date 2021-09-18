@@ -122,7 +122,18 @@
 
 
   <div class="content-wrapper">
-
+  <div>
+    <?php
+    if (!empty($this->session->flashdata('error'))) {
+      echo ("<div class='alert alert-danger'>" . $this->session->flashdata('error') . "</div>");
+    }
+    ?>
+    <?php
+    if (!empty($this->session->flashdata('success'))) {
+      echo ("<div class='alert alert-success'>" . $this->session->flashdata('success') . "</div>");
+    }
+    ?>
+  </div>
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -157,8 +168,8 @@
                     <textarea type="text" name="prod_desc" class="form-control" id="prod_desc" id="" cols="30" rows="10"></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="m_image">Main Image</label>
-                    <input type="file"  id="m_image"  name='m_img'>
+                    <label for="m_img">Main Image</label>
+                    <input type="file"  id="m_img"  name='m_img'>
 
                     <label for="multi_image">Add Multiple Image</label>
                     <input type="file" multiple id="multi_image"  name='multi_image[]'>
