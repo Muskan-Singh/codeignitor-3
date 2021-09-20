@@ -131,25 +131,32 @@
           </div><!-- /.col -->
           <button type="submit" name="logout" algin ='center' class="btn btn-secondary">Logout</button>
           </form>
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+        </div>
     </div>
-    <!-- /.content-header -->
 
-    <!-- Main content -->
-    
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-  
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
+  <?php  if($main_data){
+    foreach($main_data as $data)
+    {
+    ?>
+  <div class="container">
+  <div class="card" style="width: 18rem;">
+  <img src="./uploads/<?php echo $data['m_img']?>" class="card-img-top" alt="Oops!!!" height="100%" width="30%">
+  <div class="card-body">
+    <h5 class="card-title"><?php echo $data['pname'] ?></h5>
+    <p class="card-text"><?php  echo $data['prod_desc']?></p>
+    <a href="#" class="btn btn-primary">Open</a>
+  </div>
 </div>
-<!-- ./wrapper -->
+  </div>
+  <?php } } ?>
+
+
+  <aside class="control-sidebar control-sidebar-dark">
+      
+  </aside>
+
+</div>
 
 <!-- jQuery -->
 <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>

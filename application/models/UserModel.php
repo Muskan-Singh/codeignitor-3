@@ -28,5 +28,21 @@ class UserModel  extends CI_Model
 		$q = $this->db->query("Select * from ci_register")->result_array();
 		return $q;
 	}
+	function getProdsMultiImg($user_id)
+	{
+		$q = $this->db->query("Select * from prod_details where user_id = '$user_id'")->result_array();
+		return $q;
+	}
+	function getProdId($pname)
+	{
+		$q = $this->db->query("Select * from prod_details where pname = '$pname'")->result_array();
+		return $q[0]['prod_id'];
+		// die(dd($q));
+		
+	}
+	function InsertMultiImgData($data1)
+	{
+		$this->db->insert('multi_img',$data1);
+	} 
 	
 }

@@ -172,14 +172,14 @@
                     <input type="file"  id="m_img"  name='m_img'>
 
                     <label for="multi_image">Add Multiple Image</label>
-                    <input type="file" multiple id="multi_image"  name='multi_image[]'>
+                    <input type="file" multiple id="multi_image"  name='files[]'>
                   </div>
 
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary" value="upload">Submit</button>
                 </div>
               </form>
             </div>
