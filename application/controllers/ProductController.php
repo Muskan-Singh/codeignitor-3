@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ProductController extends CI_Controller {
 
-
+// ADD_PRODCUT_VIEW
     public function AddProductView() 
     {
         $active['active'] = 'active';
@@ -83,7 +83,7 @@ class ProductController extends CI_Controller {
         }
         $this->load->view('addProductsView');
     }
-
+// GALLERYVIEW
     public function GalleryView()
     {
         $user_id = $this->session->userdata('user_id');
@@ -157,6 +157,7 @@ class ProductController extends CI_Controller {
         $this->load->view("dataTable");
     
     }
+// MAILER
     public function Mailer()
     {
         if(count($this->input->post())>0) {
@@ -204,9 +205,19 @@ class ProductController extends CI_Controller {
 
             $this->load->view('mailerView');
         }
-        
-
     }
+    // MAIN_PRODUCT_VIEW
+    public function mainProdCont()
+    {
+        $id = $this->input->get();
+        $prod_id = $id['id'];  
+        $q = $this->db->query("select * from prod_details where prod_id = '$prod_id'")->result_array();
+        $q1 = $this->db->query("Select * from multi_img where multi_id='$prod_id'")->result_array();
+        $data1['data1'] = $q1;
+        $f['f']= $data1['data1'];
+        // die(dd($f['f']));
+        $this->load->view('SingleProductView',$f);
+    } 
 
 }
 
