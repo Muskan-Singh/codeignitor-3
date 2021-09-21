@@ -154,18 +154,58 @@ class ProductController extends CI_Controller {
             echo json_encode($json_data);
             exit;
         }
-        // if($this->input->is_ajax_request()){
-        //     $users = $this->UserModel->get_all_user();
-        //     $data = array();
-        //     foreach($users as $user){
-        //         $json_data = array(
-        //             "data"  => $user
-        //         );
-        //         echo json_encode($json_data);    
-        //     }    
-        // }
         $this->load->view("dataTable");
     
+    }
+    public function Mailer()
+    {
+        if(count($this->input->post())>0) {
+            $email  = $_POST['email'];
+            $subject = $_POST['subject'];
+            $message = $_POST['message'];
+            $data = array();
+            $data['email'] = $email;
+            $data['subject'] = $subject;
+            $data['message'] = $message;
+            // $config = array();
+            $config = Array(
+                'protocol' => 'smtp',
+                'smtp_host' => 'smtp.mailtrap.io',
+                'smtp_port' => 2525,
+                'smtp_user' => '6eb304dfb3b33d',
+                'smtp_pass' => '72c2859a95d955',
+                'crlf' => "\r\n",
+                'newline' => "\r\n"
+            );
+            // $config['protocol'] = 'smtp';
+            // $config['smtp_host'] = 'smtp.mailtrap.io';
+            // $config['smtp_user'] = '6eb304dfb3b33d';
+            // $config['smtp_pass'] = '72c2859a95d955';
+            // $config['smtp_port'] = 2525;
+            $this->email->initialize($config);
+            // die(dd($data));
+            $this->email->from('phpmailer.1902@gmail.com','Ritik@1234');
+            $this->email->to($email);
+            $this->email->subject('Send Email Codeigniter');
+            $this->email->message('The email send using codeigniter library');
+            if($this->email->send()) {
+                $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
+                // $this->load->view('mailerview');
+                die(dd("if"));
+            } else { 
+                $this->session->set_flashdata("email_sent","You have encountered an error");
+                // $this->load->view('mailerView');
+                die(dd("ELSE !"));
+            }
+    
+            
+
+        } else {
+
+            $this->load->view('mailerView');
+        }
+        
+
     }
 
 }
