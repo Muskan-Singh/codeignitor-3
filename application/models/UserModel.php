@@ -30,7 +30,7 @@ class UserModel  extends CI_Model
 	}
 	function getProdsMultiImg($user_id)
 	{
-		$q = $this->db->query("Select * from prod_details where user_id = '$user_id'")->result_array();
+		$q = $this->db->query("Select * from prod_details where user_id = '$user_id'")->num_rows();
 		return $q;
 	}
 	function getProdId($pname)
@@ -45,4 +45,11 @@ class UserModel  extends CI_Model
 		$this->db->insert('multi_img',$data1);
 	} 
 	
-}
+	public function get_products($user_id,$first,$last){
+		//die(dd($last));
+		$prod_details = $this->db->query("select * from prod_details where  user_id = '$user_id' limit $first , $last;")->result();
+		if(!empty($prod_details)){
+			return $prod_details;
+		}
+}}
+?>

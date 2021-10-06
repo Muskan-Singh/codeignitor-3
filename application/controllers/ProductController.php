@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ProductController extends CI_Controller {
 
-// ADD_PRODCUT_VIEW
+
     public function AddProductView() 
     {
         $active['active'] = 'active';
@@ -29,7 +29,6 @@ class ProductController extends CI_Controller {
             
             $this->load->library('upload', $config);
             
-            // MAIN IMG UPLOAD WITH DETAILS
             
             if ( ! $this->upload->do_upload('m_img')) {
                 $error = array('error' => $this->upload->display_errors());
@@ -43,7 +42,7 @@ class ProductController extends CI_Controller {
                 
             }
             
-            // MULTIPLE IMG UPLOAD
+            
             
             if(!empty($_FILES['files']['name']) && count(array_filter($_FILES['files']['name'])) > 0) { 
                 $filesCount = count($_FILES['files']['name']); 
@@ -55,11 +54,7 @@ class ProductController extends CI_Controller {
                     $_FILES['file']['size']     = $_FILES['files']['size'][$i]; 
 
 
-                    // $uploadPath = './uploads/'; 
-                    // $config['upload_path'] = $uploadPath; 
-                    // $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
-                    // $this->load->library('upload', $config); 
-                    // $this->upload->initialize($config); 
+                    
 
                     if($this->upload->do_upload('file')) { 
                         $fileData = $this->upload->data(); 
@@ -83,130 +78,62 @@ class ProductController extends CI_Controller {
         }
         $this->load->view('addProductsView');
     }
-// GALLERYVIEW
+
     public function GalleryView()
     {
         $user_id = $this->session->userdata('user_id');
-        $main_data = $this->UserModel->getProdsMultiImg($user_id);
-        $data = array();
-        $data['main_data'] = $main_data;
-        $config['base_url'] = 'galleryView';
-        // die(dd(count($main_data)));
-        $config['total_rows'] = count($main_data);
-        // die(dd($config['total_rows'));
-        $config['per_page'] = 1;
+        $total_records = $this->UserModel->getProdsMultiImg($user_id);
+        $start_index = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
+        $config['base_url'] = base_url() . 'galleryview';
+        $config['total_rows'] = $total_records;
+        $config['per_page'] = 3;
+        $config["uri_segment"] = 2;
+        $config['page_query_string'] = true;
+        // $result_per_page =3;
+        $total_products= $total_records ;
+    //   dd($total_products);
+    //   exit;
         $this->pagination->initialize($config);
-        $q =$this->pagination->create_links();
+        $data['links'] =$this->pagination->create_links();
+
+        //$total_pages = ceil(count($total_records)/$result_per_page);
+        if($total_products==0){
+        echo "Please add some products";
+            redirect(base_url()."AddProductView");
+        }
+        $total_pages = ceil($total_products/ $config['per_page'] );
+        //die(dd( $total_pages));
+        if(empty($this->input->get('page'))){
+            $page = 1;
+           // die(dd($page));
+        }
+        else{
+           
+            $page = $this->input->get('page');
+            if($page>   $total_pages){
+                $page=   $total_pages;
+            }
+            if($page<1){
+                $page=1;
+            }
+        }
+
+        // $first = ($page-1) *  $config['per_page'] ;
+       //die(dd( $first));
+        $data['result'] = $this->UserModel->get_products($user_id,$start_index, $config['per_page'] );
+// dd($result);
+// exit;
+        $data['number_of_pages'] =   $total_pages;
+        $data['page'] = $page;
+        // dd($data);
+        // exit;
+        //$this->load->view("ProductGallery",$data);  
+        //die(dd($data));
         $this->load->view('galleryView',$data);
     }
-// DATA TABLE
-    public function dataTable()
-    {
-        if($this->input->is_ajax_request()){
-            $start = $this->input->get('start');
-            $legnth = $this->input->get('length');
-            $coulmn = $this->input->get('order')[0]['column'];
-            $ascc = $this->input->get('order')[0]['dir'];;
-            $search =  $this->input->get('search')['value'];
-            $users = $this->db->select('ci_register.*');
-            $counts = $this->db->query("select * from ci_register")->num_rows();
-            if(!empty($search)){
-                $where = "( full_name LIKE '%".$search."%' or email  LIKE '%".$search."%')";
-                $users->where($where);
-            }
-            $count = $users->get('ci_register')->num_rows();
-            if ($coulmn == 1) {
-               $users->order_by('user_id',$ascc);
-            } elseif($coulmn == 2) {
-               $users->orderBy('full_name',$ascc);
-            } elseif($coulmn == 3) {
-               $users->orderBy('email',$ascc);
-            } 
-            
 
-            $list = $users->limit($legnth, $start)->get('ci_register')->result();
-            if(count($list) > 0){
-                // assigned.edit
-                foreach ($list as $key => $value) {
-                   
-                    $nestedData[0] = $start+$key+1;                    
-                    $nestedData[1] = $value->full_name;
-                    $nestedData[2] =$value->email;                 
-                    
-                    $data[] = $nestedData;
-                }
-
-        
-                $json_data = array(
-                    "recordsTotal"    => $counts,
-                    "recordsFiltered" => $count,
-                    "data"            => $data
-                );
-        
-        
-            }else{
-                $json_data = array(
-                    "recordsTotal"    => 0,
-                    "recordsFiltered" => 0,
-                    "data"            => []
-                );
-            }
-            echo json_encode($json_data);
-            exit;
-        }
-        $this->load->view("dataTable");
-    
-    }
-// MAILER
-    public function Mailer()
-    {
-        if(count($this->input->post())>0) {
-            $email  = $_POST['email'];
-            $subject = $_POST['subject'];
-            $message = $_POST['message'];
-            $data = array();
-            $data['email'] = $email;
-            $data['subject'] = $subject;
-            $data['message'] = $message;
-            // $config = array();
-            $config = Array(
-                'protocol' => 'smtp',
-                'smtp_host' => 'smtp.mailtrap.io',
-                'smtp_port' => 2525,
-                'smtp_user' => '6eb304dfb3b33d',
-                'smtp_pass' => '72c2859a95d955',
-                'crlf' => "\r\n",
-                'newline' => "\r\n"
-            );
-            // $config['protocol'] = 'smtp';
-            // $config['smtp_host'] = 'smtp.mailtrap.io';
-            // $config['smtp_user'] = '6eb304dfb3b33d';
-            // $config['smtp_pass'] = '72c2859a95d955';
-            // $config['smtp_port'] = 2525;
-            $this->email->initialize($config);
-            // die(dd($data));
-            $this->email->from('phpmailer.1902@gmail.com','Ritik@1234');
-            $this->email->to($email);
-            $this->email->subject('Send Email Codeigniter');
-            $this->email->message('The email send using codeigniter library');
-            if($this->email->send()) {
-                $this->session->set_flashdata("email_sent","Congragulation Email Send Successfully.");
-                // $this->load->view('mailerview');
-                die(dd("if"));
-            } else { 
-                $this->session->set_flashdata("email_sent","You have encountered an error");
-                // $this->load->view('mailerView');
-                die(dd("ELSE !"));
-            }
-    
-            
-
-        } else {
-
-            $this->load->view('mailerView');
-        }
-    }
-    // MAIN_PRODUCT_VIEW
+   
+   
     public function mainProdCont()
     {
         $id = $this->input->get();
@@ -215,9 +142,15 @@ class ProductController extends CI_Controller {
         $q1 = $this->db->query("Select * from multi_img where multi_id='$prod_id'")->result_array();
         $data1['data1'] = $q1;
         $f['f']= $data1['data1'];
-        // die(dd($f['f']));
+       
         $this->load->view('SingleProductView',$f);
     } 
+
+    public function ProductType() {
+
+        $this->load->view('prodtype_view');
+    }
+
 
 }
 

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Document</title> -->
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -25,13 +26,11 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/summernote/summernote-bs4.min.css">
+  <script src="https://cdn.ckeditor.com/4.16.2/basic/ckeditor.js"></script>
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+<body>
+<div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="<?= base_url()?>assets/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
   </div>
 
 
@@ -75,7 +74,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="home_view" class="nav-link ">
+            <a href="<?=base_url('home_view')?>" class="nav-link ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -86,7 +85,16 @@
             </a>
           </li>
           <li class="nav-item menu-open">
-            <a href="AddProductView" class="nav-link ">
+            <a href="<?=base_url('addtype')?>" class="nav-link ">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                PRODUCT TYPE
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item menu-open">
+            <a href="<?=base_url('addproview')?>" class="nav-link ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 ADD PRODUCTS
@@ -95,7 +103,7 @@
             </a>
           </li>
           <li class="nav-item menu-open">
-            <a href="galleryView" class="nav-link ">
+            <a href="<?=base_url('galleryview')?>" class="nav-link ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 GALLERY
@@ -104,7 +112,7 @@
             </a>
           </li>
           <li class="nav-item menu-open">
-            <a href="mailer" class="nav-link ">
+            <a href="<?=base_url('mailer')?>" class="nav-link ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Mail Box
@@ -114,52 +122,11 @@
           </li>
       </ul>  
     </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Mailer</h1>
-            <form action="logout" method="post">
-          </div><!-- /.col -->
-          <button type="submit" name="logout" algin ='center' class="btn btn-secondary">Logout</button>
-          </form>
-        </div>
     </div>
 
-  </div>
-
-<div class="container">
-<form action="mailer" method="post">
-  <div class="mb-3">
-    <label for="to_email" class="form-label">To :</label>
-    <input type="email" name="email" class="form-control" id="to_email" aria-describedby="emailHelp">
-  </div>
-  <div class="mb-3">
-    <label for="subjecr" class="form-label">Subject :</label>
-    <input type="text" class="form-control" id="subject" name="subject" aria-describedby="emailHelp">
-  </div>
-  <div class="mb-3">
-    <!-- <label for="exampleInputPassword1" class="form-label">Password</label> -->
-    <textarea  placeholder="Message Here" name="message" id="exampleInputPassword1" cols="123" rows="10"></textarea>
-  </div>
-  <button type="submit" name="submit_mail" class="btn btn-primary">Submit</button>
-</form>
-</div>
-
-  <aside class="control-sidebar control-sidebar-dark">
-      
   </aside>
-
-</div>
-
+    
 <!-- jQuery -->
 <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->

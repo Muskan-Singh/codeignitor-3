@@ -62,8 +62,7 @@ $route['home_view'] = 'UserController/home_view';
 $route['login_check']['post'] = 'UserController/login_check';
 
 // PRODUCTCONTROLLER
-$route['AddProductView'] = 'ProductController/AddProductView';
-$route['dataTable'] = 'ProductController/dataTable';    
-$route['galleryView'] = 'ProductController/GalleryView';
-$route['mailer'] = 'ProductController/Mailer';
+$route['addproview'] = 'ProductController/AddProductView';
+$route['addtype'] = 'ProductController/ProductType';
+$route['galleryview'] = 'ProductController/GalleryView';
 $route['mainProdCont'] = 'ProductController/mainProdCont';
