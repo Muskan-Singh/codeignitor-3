@@ -41,46 +41,99 @@ $this->load->view('nav');
         </div>
       </div>
     </div>
-    <div class="conatiner">
+    <div class="container">
     <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">ADD PRODUCT TYPE</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="post" enctype="multipart/form-data">
+              <form method="post"  action =""enctype="multipart/form-data">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="pname">Product Type</label>
-                    <input type="text" class="form-control" id="pname" name="pname" placeholder="Product Name">
+                    <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Product Type">
                   </div>
-                  <div class="form-group">
-                    <label for="price">Product Subtype</label>
-                    <input type="number" name="price" class="form-control" id="price" >
-                  </div>
-                  
-
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary" value="upload">Submit</button>
+                  <button type="submit" name = "submit" class="btn btn-primary" value="upload">Submit</button>
                 </div>
-              </form>
-            </div>
 
+               
+              </form>
+
+              </div>
+              </div>
+
+              <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Table</h1>
+            <form action="" method="post">
+          </div>
+         
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+    <div class="card card-primary">
+              <div class="card-header">
+                <h2 class="card-title">LIST OF PRODUCT TYPE</h2>
+              </div>
+
+              <form method="post"  action ="">
+                <div class="card-body">
+                  <div class="form-group">
+
+                <table class = "table">
+
+                  <tr>
+
+                    <td>Product ID</td>
+                    <td>Product Name</td>
+                    <td>Update</td>
+                    <td>Delete</td>
+                  </tr>
+
+                  <tbody>
+
+                  <?php foreach ($typedata as $td) {
+                    ?>
+                      <tr class=''>
+                          <td scope='row '> <?php echo $td->id;
+                                            // 
+                                            ?></td>
+                          <td scope='row'><?php echo $td->Prod_type;
+                                            ?> </td>
+                          <td scope="row"><a href="deldata?id=<?php echo $tp->id;
+                                                                ?>">delete</td>
+                      </tr>
+                      </tr>
+                          <?php }
+                            ?>
+
+                          </tbody>
+
+
+                </table>
+
+                </form>
+
+            </div>
+            </div>
+            </div>
+            </div>
+ 
  
   </div>
 
-  
+                
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+  
 
 <script>
 

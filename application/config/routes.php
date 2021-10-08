@@ -64,5 +64,6 @@ $route['login_check']['post'] = 'UserController/login_check';
 // PRODUCTCONTROLLER
 $route['addproview'] = 'ProductController/AddProductView';
 $route['addtype'] = 'ProductController/ProductType';
+$route['subtype'] = 'ProductController/SubType';
 $route['galleryview'] = 'ProductController/GalleryView';
 $route['mainProdCont'] = 'ProductController/mainProdCont';

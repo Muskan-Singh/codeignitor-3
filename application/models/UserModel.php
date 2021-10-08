@@ -18,7 +18,8 @@ class UserModel  extends CI_Model
 		} else {
 			return FALSE;
 		}
-	}
+		}
+	 
 	function InsertProductDetails($data)
 	{
 		$this->db->insert('prod_details',$data);	

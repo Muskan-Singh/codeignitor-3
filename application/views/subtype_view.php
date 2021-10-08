@@ -1,7 +1,6 @@
 <?php 
 
 $this->load->view('nav');
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,14 +9,12 @@ $this->load->view('nav');
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AdminLTE 3 | Dashboard</title>
 
-  <!--  -->
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
   <!-- Preloader -->
- 
-
+  
 
   <div class="content-wrapper">
   <div>
@@ -36,7 +33,7 @@ $this->load->view('nav');
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Add Products</h1>
+            <h1 class="m-0">Add Product Subtype</h1>
             <form action="logout" method="post">
           </div>
           <button type="submit" name="logout" algin ='center' class="btn btn-secondary">Logout</button>
@@ -44,57 +41,81 @@ $this->load->view('nav');
         </div>
       </div>
     </div>
-    <div class="conatiner">
+    <div class="container">
     <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">ADD PRODUCTS</h3>
+                <h3 class="card-title">ADD PRODUCT SUBTYPE</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="post" enctype="multipart/form-data">
+              <form method="post"  action =""enctype="multipart/form-data">
                 <div class="card-body">
-                 
                   <div class="form-group">
-                    <label for="pname">Product Name</label>
-                    <input type="text" class="form-control" id="pname" name="pname" placeholder="Product Name">
+                    <label for="pname">Product Subtype</label>
+                    <input type="text" class="form-control" id="sub_name" name="sub_name" placeholder="Product Subtype">
                   </div>
-                  <div class="form-group">
-                    <label for="price">Product price</label>
-                    <input type="number" name="price" class="form-control" id="price" >
-                  </div>
-                  <div class="form-group">
-                    <label for="prod_desc">Product Description</label>
-                    <textarea type="text" name="prod_desc" class="form-control" id="prod_desc" id="" cols="30" rows="10"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="m_img">Main Image</label>
-                    <input type="file"  id="m_img"  name='m_img'>
-
-                    <label for="multi_image">Add Multiple Image</label>
-                    <input type="file" multiple id="multi_image"  name='files[]'>
-                  </div>
-
+                  
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary" value="upload">Submit</button>
+                  <button type="submit" name = "submit" class="btn btn-primary" value="upload">Submit</button>
                 </div>
               </form>
             </div>
+
+
+            <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Table</h1>
+            <form action="" method="post">
+          </div>
+         
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+    <div class="card card-primary">
+              <div class="card-header">
+                <h2 class="card-title">LIST OF PRODUCT TYPE</h2>
+              </div>
+
+              <form method="post"  action ="">
+                <div class="card-body">
+                  <div class="form-group">
+
+                <table class = "table">
+
+                  <tr>
+
+                    <td>Product ID</td>
+                    <td>Product Name</td>
+                    <td>Update</td>
+                    <td>Delete</td>
+                  </tr>
+
+                
+
+
+                </table>
+
+                </form>
+
+            </div>
+            </div>
+            </div>
+            </div>
+ 
 
  
   </div>
 
   
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+  
 
 <script>
 

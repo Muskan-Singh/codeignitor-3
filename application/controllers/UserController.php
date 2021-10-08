@@ -41,25 +41,23 @@ class UserController extends CI_Controller {
 				
 				$this->session->set_flashdata("error",validation_errors());
 				redirect(base_url()."register");
-				
-            } else {
-				
-				$password1=$data['password'];
-				$password2=$data['retype_password'];
-				
-				if($password1 != $password2) {
-					$this->session->set_flashdata("error",'Your Password Dose not Match');
-					redirect(base_url()."register");
-				} else {
-					$insertData['password'] = password_hash($data['passsword'],PASSWORD_DEFAULT);
-					// unset($data['retype_password']);
-					$this->UserModel->RegisterUser($insertData);
-					$this->session->set_flashdata("success",'Successfully Registered');
-					redirect(base_url()."register");
-					
-				}
+				exit;
 				
             }
+			$password1=$data['password'];
+			$password2=$data['retype_password'];
+			
+			if($password1 != $password2) {
+				$this->session->set_flashdata("error",'Your Password Dose not Match');
+				redirect(base_url()."register");
+			} else {
+				$insertData['password'] = password_hash($data['passsword'],PASSWORD_DEFAULT);
+				// unset($data['retype_password']);
+				$this->UserModel->RegisterUser($insertData);
+				$this->session->set_flashdata("success",'Successfully Registered');
+				redirect(base_url()."register");
+				
+			}
 			
 		}
 		
@@ -79,6 +77,7 @@ class UserController extends CI_Controller {
 			redirect(base_url()."login_view");
 			// echo "Wrong Credentials";
 		}
+
 
 	}
 

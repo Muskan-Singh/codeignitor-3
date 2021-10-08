@@ -138,8 +138,8 @@ class ProductController extends CI_Controller {
     {
         $id = $this->input->get();
         $prod_id = $id['id'];  
-        $q = $this->db->query("select * from prod_details where prod_id = '$prod_id'")->result_array();
-        $q1 = $this->db->query("Select * from multi_img where multi_id='$prod_id'")->result_array();
+        $q = $this->db->query("select * from prod_details where prod_id = '$prod_id'")->result();
+        $q1 = $this->db->query("Select * from multi_img where multi_id='$prod_id'")->result();
         $data1['data1'] = $q1;
         $f['f']= $data1['data1'];
        
@@ -148,9 +148,48 @@ class ProductController extends CI_Controller {
 
     public function ProductType() {
 
+        
+        $tdata = $this->input->post();
+            $typedata = array();
+            
+            $typedata['product_name'] = $tdata['product_name'];
+           
+        
+        
+        $this->form_validation->set_rules('product_name', 'Product Type', 'required') ;
+        
+
+
+        if(isset($_POST['submit'])) {
+
+        $this->db->insert('prod_type', $typedata) ;
+       
+
+        }
+
         $this->load->view('prodtype_view');
     }
 
+    public function SubType() {
+
+
+        $stdata = $this->input->post();
+        $subtypedata = array() ;
+        $subtypedata['sub_name'] = $stdata['sub_name'];
+    
+    
+   $this->form_validation->set_rules('sub_name', 'Product Subtype', 'required') ;
+
+
+    if(isset($_POST['submit'])) {
+
+    
+    $this->db->insert('prod_subtype', $subtypedata) ;
+
+    }
+
+        $this->load->view('subtype_view') ;
+    }
 
 }
 
